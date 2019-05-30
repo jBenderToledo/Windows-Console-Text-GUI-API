@@ -126,7 +126,7 @@ namespace ScreenTest
 			writeAtXY(previousInputYLocation.x + 1, previousInputYLocation.y, ')');
 		} while (true);
 	}
-};
+};;
 
 
 int main()
