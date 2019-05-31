@@ -6,27 +6,18 @@ using namespace Screen;
 
 namespace ScreenTest
 {
+	const char BLACK = 0x20;
+	const char WHITE = 0xB2;
+
 	void checkerBoard(short x0, short y0)
 	{
-		char black = 0x20, white = 0xB2;
 
-		for (int y = 0; y < 8; y++)
-		{
-			gotoXY(0 + x0, y + y0);
-			for (int x = 0; x < 8; x++)
-			{
-				putchar(((x + y) % 2 == 0) ? black : white);
-			}
-		}
-	}
+		Coordinate c = { 0,0 };
+		short &x = c.x, &y = c.y;
 
-	void checkerBoardV2(short x0, short y0)
-	{
-		char black = 0x20, white = 0xB2;
-
-		for (int y = 0; y < 8; y++)
-			for (int x = 0; x < 8; x++)
-				writeAtXY(x + x0, y + y0, ((x + y) % 2 == 0) ? black : white);
+		for (y = y0; y < y0 + 8; y++)
+			for (x = x0; x < x0 + 8; x++)
+				writeAtXY(c, ((x + y - x0 - y0) % 2 == 0) ? BLACK : WHITE);
 	}
 
 	char hexValOf(int i)
@@ -52,9 +43,9 @@ namespace ScreenTest
 		return input;
 	}
 
-	void putStrOnLine(const char* cstring, short lineNumber)
+	void putStr(const char* cstring, Coordinate position)
 	{
-		gotoXY(0, lineNumber);
+		gotoXY(position);
 		while (*cstring != 0)
 		{
 			_putch(*cstring);
@@ -62,68 +53,67 @@ namespace ScreenTest
 		}
 	}
 
-	struct basicCoord {
-		short x = 0, y = 0;
-	};
+	typedef Coordinate basicCoord;
 
-	void putHexValue(basicCoord &c, int ch)
+	void putHexValue(basicCoord c, int ch)
 	{
 		if (0 <= ch && ch <= 9)
-			writeAtXY(c.x, c.y, ch + 0x30);
+			writeAtXY(c, ch + 0x30);
 		else if (10 <= ch && ch < 16)
-			writeAtXY(c.x, c.y, ch + 0x41 - 10);
+			writeAtXY(c, ch + 0x41 - 10);
 	}
 
 	void printBoardsIndefinitely()
 	{
-		const char* prompt = "Input a pair of hex coordinates to print a checkerboard!";
-		const char* continuePrompt = "Press a key to continue!";
+		const char* prompt = "Input a hex coordinate (0->F) to print a checker board!";
+		const char* continuePrompt =      "Press a key to continue!";
 		const char* eraseContinuePrompt = "                        ";
-		basicCoord inputCoord, displayInputXLocation, displayInputYLocation,
-			previousInputXLocation, previousInputYLocation;
+		Coordinate  inputCoord;
 		short promptHeight = 17 + 8 + 1;
 
-		displayInputXLocation.y = promptHeight;
-		displayInputXLocation.x = strlen(prompt) + 1;
-
-		displayInputYLocation.y = promptHeight;
-		displayInputYLocation.x = displayInputXLocation.x + 2;
-
-		previousInputXLocation.y = promptHeight;
-		previousInputXLocation.x = displayInputYLocation.x + 5;
-
-		previousInputYLocation.y = promptHeight;
-		previousInputYLocation.x = previousInputXLocation.x + 2;
-
+		const Coordinate
+			CURR_X_LOCATION = {(short)strlen(prompt) + 1, promptHeight },
+			CURR_Y_LOCATION = { CURR_X_LOCATION.x + 2, promptHeight },
+			PREV_X_LOCATION = { CURR_Y_LOCATION.x + 5, promptHeight },
+			PREV_Y_LOCATION = { PREV_X_LOCATION.x + 2, promptHeight };
 
 		short &x = inputCoord.x, &y = inputCoord.y;
 		turnOffCursor();
 
-		putStrOnLine(prompt, promptHeight);
+		putStr(prompt, { 0, promptHeight });
 		do
 		{
 			x = getHexValueFromUser();
-			putHexValue(displayInputXLocation, x);
+			putHexValue(CURR_X_LOCATION, x);
 
 			y = getHexValueFromUser();
-			writeAtXY(displayInputXLocation.x + 1, displayInputXLocation.y, ',');
-			putHexValue(displayInputYLocation, y);
+			writeAtXY({ CURR_X_LOCATION.x + 1, CURR_X_LOCATION.y }, ',');
+			putHexValue(CURR_Y_LOCATION, y);
 
-			putStrOnLine(continuePrompt, promptHeight + 2);
-			writeAtXY(x, y, 'X');
+			putStr(continuePrompt, { 0, promptHeight + 2 });
+			writeAtXY(inputCoord, 'X');
 			_getch();
-			putStrOnLine(eraseContinuePrompt, promptHeight + 2);
+			putStr(eraseContinuePrompt, { 0, promptHeight + 2 });
 
-			checkerBoardV2(x, y);
+			checkerBoard(x, y);
 
-			for (int x0 = 0; x0 < 3; x0++)
-				writeAtXY(displayInputXLocation.x + x0, displayInputXLocation.y, ' ');
+			for (short x0 = 0; x0 < 3; x0++)
+			{
+				writeAtXY({ CURR_X_LOCATION.x + x0, CURR_X_LOCATION.y }, ' ');
+			}
 
-			putHexValue(previousInputXLocation, x);
-			putHexValue(previousInputYLocation, y);
-			writeAtXY(previousInputXLocation.x - 1, previousInputXLocation.y, '(');
-			writeAtXY(previousInputYLocation.x - 1, previousInputYLocation.y, ',');
-			writeAtXY(previousInputYLocation.x + 1, previousInputYLocation.y, ')');
+			putHexValue(PREV_X_LOCATION, x);
+			putHexValue(PREV_Y_LOCATION, y);
+
+			writeSeries(
+				new Coordinate[3]{ {PREV_X_LOCATION.x - 1, PREV_X_LOCATION.y},
+				  {PREV_Y_LOCATION.x - 1, PREV_Y_LOCATION.y},
+				  {PREV_Y_LOCATION.x + 1, PREV_Y_LOCATION.y} },
+				new char[3]{
+					'(', ',', ')'
+				},
+				3
+			);
 		} while (true);
 	}
 };;

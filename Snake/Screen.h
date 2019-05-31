@@ -1,9 +1,16 @@
 #pragma once
 #include <Windows.h>
 #include <conio.h>
+#include <iostream>
 
 namespace Screen
 {
+	// Used mainly for console io. Makes function inputs much faster!
+	struct Coordinate
+	{
+		short x = 0, y = 0;
+	};
+
 	// Turning cursor on/off
 	void turnOffCursor()
 	{
@@ -25,24 +32,24 @@ namespace Screen
 	}
 
 	// Functions concerning coordinates on the screen
-	void gotoXY(short x, short y) // Sets screen coordinates to (x,y) by classic c-style shenanigans
+	void gotoXY(Coordinate coord) // Sets screen coordinates to (x,y) by classic c-style shenanigans
 	{
-		HANDLE h; COORD c;
+		HANDLE h; _COORD c;
 		fflush(stdout);
 
-		c.X = x; c.Y = y;
+		c.X = coord.x; c.Y = coord.y;
 
 		h = GetStdHandle(STD_OUTPUT_HANDLE);
 		SetConsoleCursorPosition(h, c);
 	}
-	void writeAtXY(short x, short y, char c)
+	void writeAtXY(Coordinate coord, char c)
 	{
-		gotoXY(x, y);
+		gotoXY(coord);
 		putchar(c);
 	}
-	void writeSeries(short xArr[], short yArr[], char chArr[], int numberOfBytes)
+	void writeSeries(Coordinate coordArr[], char chArr[], int numberOfBytes)
 	{
 		for (int i = 0; i < numberOfBytes; i++)
-			writeAtXY(xArr[i], yArr[i], chArr[i]);
+			writeAtXY(coordArr[i], chArr[i]);
 	}
 };
