@@ -24,12 +24,21 @@
     <ClInclude Include="Screen.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ScreenTest.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SnakeGame.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Snake.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SnakeGame.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

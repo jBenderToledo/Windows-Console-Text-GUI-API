@@ -9,7 +9,21 @@ namespace Screen
 	struct Coordinate
 	{
 		short x = 0, y = 0;
+
+		static bool operator==(Coordinate a, Coordinate b)
+		{
+			return (a.x == b.x && a.y == b.y);
+		}
+
+		Coordinate operator=(Coordinate b)
+		{
+			x += b.x;
+			y += b.y;
+			return { x,y };
+		}
 	};
+
+	const Coordinate ORIGIN = { 0,0 };
 
 	// Turning cursor on/off
 	void turnOffCursor()
@@ -32,7 +46,7 @@ namespace Screen
 	}
 
 	// Functions concerning coordinates on the screen
-	void gotoXY(Coordinate coord) // Sets screen coordinates to (x,y) by classic c-style shenanigans
+	void gotoXY(Coordinate coord) // Sets screen coordinates to the coordinate passed.
 	{
 		HANDLE h; _COORD c;
 		fflush(stdout);
@@ -42,6 +56,24 @@ namespace Screen
 		h = GetStdHandle(STD_OUTPUT_HANDLE);
 		SetConsoleCursorPosition(h, c);
 	}
+
+	void resetScreen()
+	{
+		system("cls");
+		gotoXY(ORIGIN);
+	}
+
+	// Force screen size in pixels
+	void changeScreenSize(short x, short y)
+	{
+		HWND consoleWindow = GetConsoleWindow();
+		RECT screenPosition;
+		GetWindowRect(consoleWindow, &screenPosition);
+
+		resetScreen();
+		MoveWindow(consoleWindow, screenPosition.left, screenPosition.top, x, y, TRUE);
+	}
+
 	void writeAtXY(Coordinate coord, char c)
 	{
 		gotoXY(coord);
