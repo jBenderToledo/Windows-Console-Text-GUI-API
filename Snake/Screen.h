@@ -3,16 +3,21 @@
 #include <conio.h>
 #include <iostream>
 
+typedef uint16_t ushort;
+
 namespace Screen
 {
 	// Used mainly for console io. Makes function inputs much faster!
 	struct Coordinate
 	{
-		short x = 0, y = 0;
+		ushort x = 0, y = 0;
 
-		static bool operator==(Coordinate a, Coordinate b)
+		Coordinate() { x = 0; y = 0; }
+		Coordinate(long x0, long y0) { x |= x0; y |= y0; }
+
+		bool operator==(Coordinate b)
 		{
-			return (a.x == b.x && a.y == b.y);
+			return (x == b.x && y == b.y);
 		}
 
 		Coordinate operator=(Coordinate b)
@@ -26,7 +31,7 @@ namespace Screen
 	const Coordinate ORIGIN = { 0,0 };
 
 	// Turning cursor on/off
-	void turnOffCursor()
+	inline void turnOffCursor()
 	{
 		HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 		CONSOLE_CURSOR_INFO info;
@@ -35,7 +40,7 @@ namespace Screen
 
 		SetConsoleCursorInfo(h, &info);
 	}
-	void turnOnCursor()
+	inline void turnOnCursor()
 	{
 		HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 		CONSOLE_CURSOR_INFO info;
@@ -46,7 +51,7 @@ namespace Screen
 	}
 
 	// Functions concerning coordinates on the screen
-	void gotoXY(Coordinate coord) // Sets screen coordinates to the coordinate passed.
+	inline void gotoXY(Coordinate coord) // Sets screen coordinates to the coordinate passed.
 	{
 		HANDLE h; _COORD c;
 		fflush(stdout);
@@ -57,14 +62,14 @@ namespace Screen
 		SetConsoleCursorPosition(h, c);
 	}
 
-	void resetScreen()
+	inline void resetScreen()
 	{
 		system("cls");
 		gotoXY(ORIGIN);
 	}
 
 	// Force screen size in pixels
-	void changeScreenSize(short x, short y)
+	inline void changeScreenSize(ushort x, ushort y)
 	{
 		HWND consoleWindow = GetConsoleWindow();
 		RECT screenPosition;
@@ -74,14 +79,57 @@ namespace Screen
 		MoveWindow(consoleWindow, screenPosition.left, screenPosition.top, x, y, TRUE);
 	}
 
-	void writeAtXY(Coordinate coord, char c)
+	inline void writeToXY(Coordinate coord, unsigned char c)
 	{
 		gotoXY(coord);
 		putchar(c);
 	}
-	void writeSeries(Coordinate coordArr[], char chArr[], int numberOfBytes)
+	inline void writeSeries(Coordinate coordArr[], char chArr[], int numberOfBytes)
 	{
 		for (int i = 0; i < numberOfBytes; i++)
-			writeAtXY(coordArr[i], chArr[i]);
+			writeToXY(coordArr[i], chArr[i]);
+	}
+	inline void writeToScreen(char **matrix, ushort width, ushort height, Coordinate startPosition = { 0,0 })
+	// Assumes that matrix is a suitably large matrix such that it contains at least "height" rows each at least "width" wide.
+	// Assumes that startPosition is a reasonable/legal coordinate on the screen.
+	{
+		Coordinate currentPosition;
+		ushort &x = currentPosition.x, &y = currentPosition.y;
+		ushort &x0 = startPosition.x, &y0 = startPosition.y;
+		char* currentRow;
+
+		for (y = y0; y < y0 + height; y++)
+		{
+			x = x0;
+			gotoXY(currentPosition);
+			currentRow = matrix[y - y0];
+
+			while (x < x0 + width)
+			{
+				putchar(currentRow[x - x0]);
+				x++;
+			}
+		}
+	}
+	inline void writeToBuffer(char **buffer, char** matrix, ushort width, ushort height, Coordinate startPosition = { 0,0 })
+	// Assumes that matrix is a suitably large matrix such that it contains at least "height" rows each at least "width" wide.
+	// Assumes that startPosition is a reasonable/legal coordinate on the screen.
+	{
+		Coordinate currentPosition;
+		ushort &x = currentPosition.x, &y = currentPosition.y;
+		ushort &x0 = startPosition.x, &y0 = startPosition.y;
+		char* currentRow;
+
+		for (y = y0; y < y0 + height; y++)
+		{
+			x = x0;
+			currentRow = matrix[y - y0];
+
+			while (x < x0 + width)
+			{
+				buffer[y - y0][x - x0] = currentRow[x - x0];
+				x++;
+			}
+		}
 	}
 };

@@ -1,7 +1,11 @@
 #pragma once
-
+#include "pch.h"
 #include "Screen.h"
-using namespace Screen;
+#include <iostream>
+#include <string>
+#include <string.h>
+
+using Screen::Coordinate;
 
 class SnakeGame
 {
@@ -12,24 +16,28 @@ public:
 	long play(); // Returns the score from playing Snake.
 
 private:
-	const char FOOD = 'D';
+	const char FOOD_ICON = 'D';
 	const char SNAKE_HEAD[4] = { 'V', '<', '^', '>' };
 	const char SNAKE_SEGMENT = 'O';
-	const char WALL_CHARACTER = 0xB2;
-	const short BOARD_SIZE = 80; // Board is BOARD_SIZE x BOARD_SIZE in size excluding walls
-	const short STATS_OFFSET = BOARD_SIZE + 4;
+	const unsigned char WALL_CHARACTER = 0xB2;
+	const short STATS_OFFSET = 3;
+
+	const short BOARD_SIZE = 20 + 2; // Board is BOARD_SIZE x BOARD_SIZE in size including walls.
+	const short GUI_WIDTH = 40 - BOARD_SIZE;
+	const short GUI_HEIGHT = BOARD_SIZE;
+	const short GRID_HEIGHT = (BOARD_SIZE > GUI_HEIGHT) ? BOARD_SIZE : GUI_HEIGHT;
+	const short GRID_WIDTH = BOARD_SIZE + GUI_WIDTH;
 
 	const Coordinate STARTING_CORNER = { 0, 0 };
-	const Coordinate ENDING_CORNER = { BOARD_SIZE, BOARD_SIZE };
+	const Coordinate ENDING_CORNER = { BOARD_SIZE - 1, BOARD_SIZE - 1 };
 	const Coordinate SCORE_POSITION = { STATS_OFFSET - 1, 2 };
 	const Coordinate TIME_POSITION = { STATS_OFFSET, SCORE_POSITION.y + 2 };
 	const Coordinate SIZE_POSITION = { STATS_OFFSET, TIME_POSITION.y + 1 };
 	const Coordinate SCORE_RATE_POSITION = { STATS_OFFSET, SIZE_POSITION.y + 1 };
 
-
 	struct Player
 	{
-		static enum Direction { DOWN, LEFT, UP, RIGHT };
+		enum Direction { DOWN, LEFT, UP, RIGHT };
 
 		Coordinate location;
 		Direction dir;
@@ -37,7 +45,7 @@ private:
 		Player();
 		~Player();
 
-		const static int MAX_SIZE = 255;
+		const static int MAX_SIZE = 0xFFFF;
 		const static int STARTING_SIZE = 5;
 		int size = 0;
 		bool isDead = false;
@@ -47,14 +55,24 @@ private:
 	};
 
 	Player snake;
+	Coordinate foodLocation;
+
 	long score = 0;
-
-
 	double speed;
 
-	void move(Player &p);
+	char **board;
+	const Coordinate BOARD_OFFSET = Screen::ORIGIN;
+	char **gui;
+	const Coordinate GUI_OFFSET = { BOARD_OFFSET.x + BOARD_SIZE, BOARD_OFFSET.y };
+	char **grid;
+	// Grid offset is ALWAYS the origin because it is the lowest visual layer by default.
 
-	Coordinate foodLocation;
+	void drawScreen();
+	void drawBoard();
+	void drawGUI();
+	void drawGrid();
+	void move();
+	void prepareSquare();
 
 };
 
