@@ -62,6 +62,7 @@ namespace Screen
 		SetConsoleCursorPosition(h, c);
 	}
 
+	// Returns the screen to a blank state
 	inline void resetScreen()
 	{
 		system("cls");

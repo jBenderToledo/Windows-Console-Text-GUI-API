@@ -11,7 +11,7 @@ namespace ScreenTest
 	{
 
 		Coordinate c = { 0,0 };
-		short &x = c.x, &y = c.y;
+		uint16_t &x = c.x, &y = c.y;
 
 		for (y = y0; y < y0 + 8; y++)
 			for (x = x0; x < x0 + 8; x++)
@@ -58,8 +58,7 @@ namespace ScreenTest
 		else if (10 <= ch && ch < 16)	   // 
 			writeToXY(c, ch + 0x41 - 10);  // Then, prints it to the coordinate provided.
 	}
-
-	inline void printBoardsIndefinitely()
+	inline void run()
 	{
 		const char* prompt = "Input a hex coordinate (0->F) to print a checker board!";
 		const char* continuePrompt = "Press a key to continue!";
@@ -73,43 +72,37 @@ namespace ScreenTest
 			PREV_X_LOCATION = { CURR_Y_LOCATION.x + 5, promptHeight },
 			PREV_Y_LOCATION = { PREV_X_LOCATION.x + 2, promptHeight };
 
-		short &x = inputCoord.x, &y = inputCoord.y;
+		uint16_t &xValue = inputCoord.x, &yValue = inputCoord.y;
 		turnOffCursor();
 
 		putStr(prompt, { 0, promptHeight });
 		do
 		{
-			x = getHexValueFromUser();
-			putHexValue(CURR_X_LOCATION, x);
+			xValue = getHexValueFromUser();
+			putHexValue(CURR_X_LOCATION, xValue);
 
-			y = getHexValueFromUser();
+			yValue = getHexValueFromUser();
 			writeToXY({ CURR_X_LOCATION.x + 1, CURR_X_LOCATION.y }, ',');
-			putHexValue(CURR_Y_LOCATION, y);
+			putHexValue(CURR_Y_LOCATION, yValue);
 
 			putStr(continuePrompt, { 0, promptHeight + 2 });
 			writeToXY(inputCoord, 'X');
 			_getch();
 			putStr(eraseContinuePrompt, { 0, promptHeight + 2 });
 
-			checkerBoard(x, y);
+			checkerBoard(xValue, yValue);
 
 			for (short x0 = 0; x0 < 3; x0++)
 			{
 				writeToXY({ CURR_X_LOCATION.x + x0, CURR_X_LOCATION.y }, ' ');
 			}
 
-			putHexValue(PREV_X_LOCATION, x);
-			putHexValue(PREV_Y_LOCATION, y);
+			putHexValue(PREV_X_LOCATION, xValue);
+			putHexValue(PREV_Y_LOCATION, yValue);
 
-			writeSeries(
-				new Coordinate[3]{ {PREV_X_LOCATION.x - 1, PREV_X_LOCATION.y},
-				  {PREV_Y_LOCATION.x - 1, PREV_Y_LOCATION.y},
-				  {PREV_Y_LOCATION.x + 1, PREV_Y_LOCATION.y} },
-				new char[3]{
-					'(', ',', ')'
-				},
-				3
-			);
+			writeToXY({ PREV_X_LOCATION.x - 1, PREV_X_LOCATION.y }, '(');
+			writeToXY({ PREV_Y_LOCATION.x - 1, PREV_Y_LOCATION.y }, ',');
+			writeToXY({ PREV_Y_LOCATION.x + 1, PREV_Y_LOCATION.y }, ')');
 		} while (true);
 	}
 };

@@ -1,8 +1,7 @@
 #include "pch.h"
-#include "SnakeGame.h"
+#include "ScreenTest.h"
 
 int main()
 {
-	SnakeGame snake;
-	long score = snake.play();
+	ScreenTest::run();
 };
