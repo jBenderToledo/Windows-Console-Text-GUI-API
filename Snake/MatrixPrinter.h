@@ -5,13 +5,15 @@
 class MatrixPrinter
 {
 	char** buffer;
-	uint16_t width;
-	uint16_t height;
+	uint16_t columnCount;
+	uint16_t rowCount;
 
 	Coordinate currentPosition;
 	Coordinate startPosition;
 
 public:
+	MatrixPrinter(char** buffer, uint16_t rowCount, uint16_t columnCount);
+	~MatrixPrinter();
 	void WriteToScreen(Coordinate startPosition);
 
 private:
