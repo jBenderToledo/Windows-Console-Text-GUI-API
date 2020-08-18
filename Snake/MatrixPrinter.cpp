@@ -9,11 +9,16 @@ MatrixPrinter::MatrixPrinter(
 	columnCount = initialColumnCount;
 	rowCount = initialRowCount;
 	
-	buffer = new char[rowCount][columnCount];
+	buffer = new char*[rowCount];
+	for (int i = 0; i < rowCount; i++)
+		buffer[i] = new char[columnCount];
 }
 
 MatrixPrinter::~MatrixPrinter() {
+	for (int i = 0; i < rowCount; i++)
+		delete[] buffer[i];
 
+	delete[] buffer;
 }
 
 inline void MatrixPrinter::WriteToScreen(

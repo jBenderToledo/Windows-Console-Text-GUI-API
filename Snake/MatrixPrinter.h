@@ -5,8 +5,8 @@
 class MatrixPrinter
 {
 	char** buffer;
-	uint16_t columnCount;
 	uint16_t rowCount;
+	uint16_t columnCount;
 
 	Coordinate currentPosition;
 	Coordinate startPosition;
