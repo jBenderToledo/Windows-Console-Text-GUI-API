@@ -2,11 +2,10 @@
 #include "Coordinate.h"
 
 
-Coordinate::Coordinate() {
-	x = 0;
-	y = 0;
-}
-Coordinate::Coordinate(long x0, long y0) {
+Coordinate::Coordinate(
+	long x0 = 0,
+	long y0 = 0
+) {
 	x |= x0;
 	y |= y0;
 }
