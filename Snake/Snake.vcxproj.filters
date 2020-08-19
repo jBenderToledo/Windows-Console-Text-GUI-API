@@ -9,6 +9,12 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
+    <Filter Include="Header Files\Screen">
+      <UniqueIdentifier>{622173bd-9286-458d-8d94-c3bf1a411ac0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Screen">
+      <UniqueIdentifier>{de69ff63-0952-455f-ae5f-20f74a782375}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -17,14 +23,14 @@
     <ClInclude Include="ScreenTest.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ConsoleIO.h">
+      <Filter>Header Files\Screen</Filter>
+    </ClInclude>
     <ClInclude Include="Coordinate.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Screen</Filter>
     </ClInclude>
     <ClInclude Include="MatrixPrinter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ConsoleIO.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Screen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -34,14 +40,14 @@
     <ClCompile Include="GUI.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ConsoleIO.cpp">
+      <Filter>Source Files\Screen</Filter>
+    </ClCompile>
     <ClCompile Include="Coordinate.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Screen</Filter>
     </ClCompile>
     <ClCompile Include="MatrixPrinter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ConsoleIO.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Screen</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
