@@ -8,10 +8,12 @@ using namespace Screen;
 MatrixPrinter::MatrixPrinter(
 	char** initialBuffer,
 	uint16_t initialRowCount,
-	uint16_t initialColumnCount
+	uint16_t initialColumnCount,
+	Coordinate initialStartPosition
 ) {
 	columnCount = initialColumnCount;
 	rowCount = initialRowCount;
+	startPosition = initialStartPosition;
 	
 	buffer = new char*[rowCount];
 	for (int i = 0; i < rowCount; i++) {
@@ -28,13 +30,8 @@ MatrixPrinter::~MatrixPrinter() {
 	delete[] buffer;
 }
 
-void MatrixPrinter::WriteAllToScreen(
-	Coordinate printStartPosition
-) {	
-	startPosition.x = printStartPosition.x;
-	startPosition.y = printStartPosition.y;
-
-	uint16_t finalYPosition = printStartPosition.y + rowCount;
+void MatrixPrinter::WriteAllToScreen() {	
+	uint16_t finalYPosition = startPosition.y + rowCount;
 
 	for (currentPosition.y = startPosition.y; currentPosition.y < finalYPosition; currentPosition.y++)
 	{

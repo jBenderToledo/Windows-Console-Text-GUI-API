@@ -31,7 +31,7 @@ class ChessBoard
 
 	MatrixPrinter* boardPrinter;
 	Coordinate boardStartPosition = { 1, 1 };
-	Coordinate promptStartPosition = { 1, 4 * 8 + 1 + 2 };
+	Coordinate promptStartPosition = { 1, 3 * 8 + 1 + 2 };
 
 public:
 	ChessBoard();
