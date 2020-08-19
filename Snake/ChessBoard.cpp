@@ -4,6 +4,8 @@
 #include "ChessBoard.h"
 #include "MatrixPrinter.h"
 
+using namespace Screen;
+
 ChessBoard::ChessBoard()
 {
 	InitializeBoard();
