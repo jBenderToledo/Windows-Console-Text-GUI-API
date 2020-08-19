@@ -15,7 +15,7 @@ namespace Screen
 	public:
 		MatrixPrinter(char** buffer, uint16_t rowCount, uint16_t columnCount);
 		~MatrixPrinter();
-		void WriteToScreen(Coordinate startPosition);
+		void WriteAllToScreen(Coordinate startPosition);
 
 	private:
 		char* DetermineCurrentRow();

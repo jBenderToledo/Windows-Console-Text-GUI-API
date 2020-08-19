@@ -14,6 +14,6 @@ namespace Screen
 		static void TurnOffCursor();
 		static void TurnOnCursor();
 		static void GotoXY(Coordinate position);
-		static void writeToXY(Coordinate coord, unsigned char c);
+		static void WriteToXY(Coordinate coord, unsigned char c);
 	};
 }

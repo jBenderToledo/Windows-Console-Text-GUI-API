@@ -10,8 +10,8 @@ class ChessBoard
 	static const unsigned char BLACK_SQUARE = ' ';
 	static const unsigned char WHITE_SQUARE = 0xB2;
 
-
-	const char INITIAL_STATE[8][9] = {
+	// upside-down white perspective
+	const char INITIAL_STATE[8][9] = { 
 		"RNBQKBNR",
 		"PPPPPPPP",
 		"        ",
@@ -19,7 +19,8 @@ class ChessBoard
 		"        ",
 		"        ",
 		"pppppppp",
-		"rnbqkbnr" };
+		"rnbqkbnr"
+	};
 
 	const char MOVE_PROMPT[2][55] = {
 		"White (capital) player, please make your move. ",
@@ -36,13 +37,14 @@ public:
 	ChessBoard();
 	void PrintState();
 	bool Move(int xCoordinate, int yCoordinate, int newCharacter);
+	char GetPieceAt(int xCoordinate, int yCoordinate);
 
 private:
 	void InitializeBoard();
 	char** CreateCleanBoard();
 	bool IsLegalMove(int xCoordinate, int yCoordinate, int newCharacter);
-	bool isBlackPiece(int xCoordinate, int yCoordinate);
-	bool isWhitePiece(int xCoordinate, int yCoordinate);
-	bool isEmpty(int xCoordinate, int yCoordinate);
-	bool isWhiteSquare(int xCoordinate, int yCoordinate);
+	bool IsBlackPiece(int xCoordinate, int yCoordinate);
+	bool IsWhitePiece(int xCoordinate, int yCoordinate);
+	bool IsEmpty(int xCoordinate, int yCoordinate);
+	bool IsWhiteSquare(int xCoordinate, int yCoordinate);
 };

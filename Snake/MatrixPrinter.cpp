@@ -1,3 +1,4 @@
+#pragma once
 #include "pch.h"
 #include "MatrixPrinter.h"
 
@@ -25,10 +26,11 @@ MatrixPrinter::~MatrixPrinter() {
 	delete[] buffer;
 }
 
-inline void MatrixPrinter::WriteToScreen(
-	Coordinate startPosition = Screen::ORIGIN
+void MatrixPrinter::WriteAllToScreen(
+	Coordinate startPosition
 ) {
-	currentPosition = startPosition;
+	currentPosition.x = startPosition.x;
+	currentPosition.y = startPosition.y;
 	
 	uint16_t finalYPosition = startPosition.y + rowCount;
 	for (currentPosition.y = startPosition.y; currentPosition.y < finalYPosition; currentPosition.y++)
@@ -38,11 +40,11 @@ inline void MatrixPrinter::WriteToScreen(
 	}
 }
 
-inline char* MatrixPrinter::DetermineCurrentRow() {
+char* MatrixPrinter::DetermineCurrentRow() {
 	return buffer[currentPosition.y - startPosition.y];
 }
 
-inline void MatrixPrinter::PrintRow() {
+void MatrixPrinter::PrintRow() {
 	char* currentRow = DetermineCurrentRow();
 	Screen::ConsoleIO::GotoXY(currentPosition);
 
@@ -50,7 +52,7 @@ inline void MatrixPrinter::PrintRow() {
 }
 
 
-inline void MatrixPrinter::PrintCurrentRow(char* currentRow) {
+void MatrixPrinter::PrintCurrentRow(char* currentRow) {
 	for (int position = 0; position < columnCount; position++)
 	{
 		putchar(currentRow[position]);

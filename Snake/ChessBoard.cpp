@@ -2,6 +2,7 @@
 #include "pch.h"
 
 #include "ChessBoard.h"
+#include "MatrixPrinter.h"
 
 ChessBoard::ChessBoard()
 {
@@ -16,7 +17,14 @@ ChessBoard::ChessBoard()
 
 void ChessBoard::PrintState()
 {
-	boardPrinter->WriteToScreen(boardStartPosition);
+	boardPrinter->WriteAllToScreen(boardStartPosition);
+
+	return;
+}
+
+char ChessBoard::GetPieceAt(int xCoordinate, int yCoordinate)
+{
+	return boardState[yCoordinate][xCoordinate];
 }
 
 void ChessBoard::InitializeBoard()
@@ -36,13 +44,13 @@ char** ChessBoard::CreateCleanBoard()
 		currentRow = buffer[y];
 
 		for (int x = 0; x < 32; x++) {
-			currentRow[x] = isWhitePiece(x, y) ? WHITE_SQUARE : BLACK_SQUARE;
+			currentRow[x] = IsWhiteSquare(x, y) ? WHITE_SQUARE : BLACK_SQUARE;
 		}
 	}
 
 	for (int y = 0; y < 8; y++) {
 		for (int x = 0; x < 8; x++) {
-			buffer[4 * y + 2][4 * y + 2] = boardState[y][x];
+			buffer[4 * y + 2][4 * y + 2] = GetPieceAt(x,y);
 		}
 	}
 
@@ -50,18 +58,24 @@ char** ChessBoard::CreateCleanBoard()
 	return buffer;
 }
 
-bool ChessBoard::isWhitePiece(int xCoordinate, int yCoordinate) {
-	char piece = boardState[yCoordinate][xCoordinate];
+bool ChessBoard::IsBlackPiece(int xCoordinate, int yCoordinate) {
+	char piece = GetPieceAt(xCoordinate, yCoordinate);
+
+	return 'a' <= piece && piece <= 'z';
+}
+
+bool ChessBoard::IsWhitePiece(int xCoordinate, int yCoordinate) {
+	char piece = GetPieceAt(xCoordinate, yCoordinate);
 
 	return 'A' <= piece && piece <= 'Z';
 }
 
-bool ChessBoard::isEmpty(int xCoordinate, int yCoordinate)
+bool ChessBoard::IsEmpty(int xCoordinate, int yCoordinate)
 {
-	return !isBlackPiece(xCoordinate, yCoordinate)
-		&& !isWhitePiece(xCoordinate, yCoordinate);
+	return !IsBlackPiece(xCoordinate, yCoordinate)
+		&& !IsWhitePiece(xCoordinate, yCoordinate);
 }
 
-bool ChessBoard::isWhiteSquare(int xCoordinate, int yCoordinate) {
+bool ChessBoard::IsWhiteSquare(int xCoordinate, int yCoordinate) {
 	return ((xCoordinate & 7) >= 4) ^ ((yCoordinate & 7) >= 4);
 }
