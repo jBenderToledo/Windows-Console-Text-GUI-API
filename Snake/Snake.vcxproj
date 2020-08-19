@@ -155,7 +155,6 @@
     <ClInclude Include="Coordinate.h" />
     <ClInclude Include="MatrixPrinter.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="Screen.h" />
     <ClInclude Include="ScreenTest.h" />
     <ClInclude Include="ConsoleIO.h" />
   </ItemGroup>

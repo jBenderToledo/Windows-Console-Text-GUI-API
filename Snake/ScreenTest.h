@@ -1,5 +1,6 @@
 #pragma once
-#include "Screen.h"
+#include "ConsoleIO.h"
+
 using namespace Screen;
 
 namespace ScreenTest

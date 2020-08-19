@@ -4,29 +4,35 @@
 using namespace Screen;
 
 void ConsoleIO::TurnOffCursor() {
-	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+	HANDLE stdHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_CURSOR_INFO info;
 	info.dwSize = 100;
 	info.bVisible = FALSE;
 
-	SetConsoleCursorInfo(h, &info);
+	SetConsoleCursorInfo(stdHandle, &info);
 }
 
 void ConsoleIO::TurnOnCursor() {
-	HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
+	HANDLE stdHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 	CONSOLE_CURSOR_INFO info;
 	info.dwSize = 100;
 	info.bVisible = TRUE;
 
-	SetConsoleCursorInfo(h, &info);
+	SetConsoleCursorInfo(stdHandle, &info);
 }
 
 void ConsoleIO::GotoXY(Coordinate position) {
-	HANDLE h; _COORD c;
+	HANDLE stdHandle; _COORD stdCoordinate;
 	fflush(stdout);
 
-	c.X = position.x; c.Y = position.y;
+	stdCoordinate.X = position.x; stdCoordinate.Y = position.y;
 
-	h = GetStdHandle(STD_OUTPUT_HANDLE);
-	SetConsoleCursorPosition(h, c);
+	stdHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+	SetConsoleCursorPosition(stdHandle, stdCoordinate);
+}
+
+void ConsoleIO::writeToXY(Coordinate position, unsigned char c)
+{
+	ConsoleIO::GotoXY(position);
+	putchar(c);
 }

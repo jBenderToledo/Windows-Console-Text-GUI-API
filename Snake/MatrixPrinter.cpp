@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "MatrixPrinter.h"
 
+using namespace Screen;
+
 MatrixPrinter::MatrixPrinter(
 	char** initialBuffer,
 	uint16_t initialRowCount,
@@ -10,8 +12,10 @@ MatrixPrinter::MatrixPrinter(
 	rowCount = initialRowCount;
 	
 	buffer = new char*[rowCount];
-	for (int i = 0; i < rowCount; i++)
+	for (int i = 0; i < rowCount; i++) {
 		buffer[i] = new char[columnCount];
+		strcpy_s(buffer[i], columnCount, initialBuffer[i]);
+	}
 }
 
 MatrixPrinter::~MatrixPrinter() {
