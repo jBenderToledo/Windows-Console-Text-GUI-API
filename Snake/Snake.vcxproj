@@ -160,6 +160,7 @@
     <ClInclude Include="ConsoleIO.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ChessBoard.cpp" />
     <ClCompile Include="Coordinate.cpp" />
     <ClCompile Include="MatrixPrinter.cpp" />
     <ClCompile Include="pch.cpp">

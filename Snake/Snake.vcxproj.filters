@@ -21,6 +21,9 @@
     <Filter Include="Header Files\ChessBoard">
       <UniqueIdentifier>{963a1853-d1db-43ce-8b52-d3b3d9af4ccf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\ChessBoard">
+      <UniqueIdentifier>{93d5b2a6-9683-466c-88c6-ae6323e42a23}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -57,6 +60,9 @@
     </ClCompile>
     <ClCompile Include="MatrixPrinter.cpp">
       <Filter>Source Files\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="ChessBoard.cpp">
+      <Filter>Source Files\ChessBoard</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
