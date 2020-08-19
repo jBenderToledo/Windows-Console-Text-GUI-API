@@ -1,4 +1,6 @@
 #pragma once
+#include "pch.h"
+
 #include <Windows.h>
 #include <conio.h>
 #include <iostream>
