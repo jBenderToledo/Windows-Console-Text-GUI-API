@@ -38,6 +38,9 @@
     <ClInclude Include="ChessBoard.h">
       <Filter>Header Files\ChessBoard</Filter>
     </ClInclude>
+    <ClInclude Include="GUI_Test.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

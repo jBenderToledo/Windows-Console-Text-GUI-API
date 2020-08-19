@@ -1,8 +1,20 @@
 #include "pch.h"
 
 #include "ChessBoard.h"
+#include "GUI_Test.h"
 
 int main()
+{
+	using namespace GUI_Test;
+
+	TestChessBoard();
+
+	system("cls");
+
+	TestTicTacToe();
+};
+
+void GUI_Test::TestChessBoard()
 {
 	ChessBoard PlayChess = ChessBoard();
 
@@ -17,4 +29,9 @@ int main()
 
 	std::cout << "Psych!! Get dunked on, NERD! Re5!\n\n";
 	exitInput = _getch();
-};
+}
+
+void GUI_Test::TestTicTacToe()
+{
+
+}

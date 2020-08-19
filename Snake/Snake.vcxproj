@@ -154,6 +154,7 @@
   <ItemGroup>
     <ClInclude Include="ChessBoard.h" />
     <ClInclude Include="Coordinate.h" />
+    <ClInclude Include="GUI_Test.h" />
     <ClInclude Include="MatrixPrinter.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="ConsoleIO.h" />
