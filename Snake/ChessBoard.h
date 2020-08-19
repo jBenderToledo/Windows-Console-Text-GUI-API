@@ -3,8 +3,6 @@
 
 #include "MatrixPrinter.h"
 
-using namespace Screen;
-
 class ChessBoard
 {
 	static const unsigned char BLACK_SQUARE = ' ';
