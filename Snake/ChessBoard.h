@@ -27,7 +27,7 @@ class ChessBoard
 
 	char boardState[8][9];
 
-	MatrixPrinter* boardPrinter;
+	Screen::MatrixPrinter* boardPrinter;
 	Coordinate boardStartPosition = { 1, 1 };
 	Coordinate promptStartPosition = { 1, 3 * 8 + 1 + 2 };
 
