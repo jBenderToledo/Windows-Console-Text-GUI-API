@@ -31,7 +31,7 @@ void ConsoleIO::GotoXY(Coordinate position) {
 	SetConsoleCursorPosition(stdHandle, stdCoordinate);
 }
 
-void ConsoleIO::writeToXY(Coordinate position, unsigned char c)
+void ConsoleIO::WriteToXY(Coordinate position, unsigned char c)
 {
 	ConsoleIO::GotoXY(position);
 	putchar(c);

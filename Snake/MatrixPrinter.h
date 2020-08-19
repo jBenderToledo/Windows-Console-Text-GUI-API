@@ -13,9 +13,10 @@ namespace Screen
 		Coordinate startPosition;
 
 	public:
-		MatrixPrinter(char** buffer, uint16_t rowCount, uint16_t columnCount);
+		MatrixPrinter(char** buffer, uint16_t rowCount, uint16_t columnCount, Coordinate initialStartPosition);
 		~MatrixPrinter();
-		void WriteToScreen(Coordinate startPosition);
+		void WriteAllToScreen();
+		void Edit(int xCoordinate, int yCoordinate, char newValue);
 
 	private:
 		char* DetermineCurrentRow();

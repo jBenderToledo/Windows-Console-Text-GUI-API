@@ -152,13 +152,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ChessBoard.h" />
     <ClInclude Include="Coordinate.h" />
     <ClInclude Include="MatrixPrinter.h" />
     <ClInclude Include="pch.h" />
-    <ClInclude Include="ScreenTest.h" />
     <ClInclude Include="ConsoleIO.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ChessBoard.cpp" />
     <ClCompile Include="Coordinate.cpp" />
     <ClCompile Include="MatrixPrinter.cpp" />
     <ClCompile Include="pch.cpp">
@@ -167,7 +168,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="GUI.cpp" />
+    <ClCompile Include="GUI_Test.cpp" />
     <ClCompile Include="ConsoleIO.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
