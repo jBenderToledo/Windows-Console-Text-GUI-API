@@ -1,7 +1,15 @@
 #include "pch.h"
-#include "ScreenTest.h"
+
+#include "ChessBoard.h"
 
 int main()
 {
-	ScreenTest::run();
+	ChessBoard PlayChess = ChessBoard();
+
+	PlayChess.PrintState();
+
+	std::cout << "\n\nSuccess!\n\n";
+
+	char exitInput;
+	std::cin >> exitInput;
 };

@@ -10,16 +10,16 @@ class ChessBoard
 	static const unsigned char BLACK_SQUARE = ' ';
 	static const unsigned char WHITE_SQUARE = 0xB2;
 
-	// upside-down white perspective
+	// white perspective
 	const char INITIAL_STATE[8][9] = { 
-		"RNBQKBNR",
-		"PPPPPPPP",
-		"        ",
-		"        ",
-		"        ",
-		"        ",
+		"rnbqkbnr",
 		"pppppppp",
-		"rnbqkbnr"
+		"        ",
+		"        ",
+		"        ",
+		"        ",
+		"PPPPPPPP",
+		"RNBQKBNR"
 	};
 
 	const char MOVE_PROMPT[2][55] = {
@@ -45,6 +45,6 @@ private:
 	bool IsLegalMove(int xCoordinate, int yCoordinate, int newCharacter);
 	bool IsBlackPiece(int xCoordinate, int yCoordinate);
 	bool IsWhitePiece(int xCoordinate, int yCoordinate);
-	bool IsEmpty(int xCoordinate, int yCoordinate);
+	bool IsSquareEmpty(int xCoordinate, int yCoordinate);
 	bool IsWhiteSquare(int xCoordinate, int yCoordinate);
 };

@@ -10,8 +10,8 @@ ChessBoard::ChessBoard()
 
 	boardPrinter = new Screen::MatrixPrinter(
 		CreateCleanBoard(),
-		4 * 8 + 1,
-		4 * 8 + 1
+		4 * 8,
+		4 * 8
 	);
 }
 
@@ -28,7 +28,9 @@ char ChessBoard::GetPieceAt(int xCoordinate, int yCoordinate)
 void ChessBoard::InitializeBoard()
 {
 	for (int i = 0; i < 8; i++) {
-		strcpy_s(boardState[i], 8, INITIAL_STATE[i]);
+		boardState[i][9] = 0;
+
+		strcpy_s(boardState[i], sizeof(boardState[i]), (const char*) INITIAL_STATE[i]);
 	}
 }
 
@@ -38,7 +40,7 @@ char** ChessBoard::CreateCleanBoard()
 	char* currentRow;
 
 	for (int y = 0; y < 32; y++) {
-		buffer[y] = new char[32];
+		buffer[y] = new char[33]{ 0 };
 		currentRow = buffer[y];
 
 		for (int x = 0; x < 32; x++) {
@@ -48,7 +50,9 @@ char** ChessBoard::CreateCleanBoard()
 
 	for (int y = 0; y < 8; y++) {
 		for (int x = 0; x < 8; x++) {
-			buffer[4 * y + 2][4 * y + 2] = GetPieceAt(x,y);
+			if (!IsSquareEmpty(x, y)) {
+				buffer[4 * y + 2][4 * x + 2] = GetPieceAt(x, y);
+			}
 		}
 	}
 
@@ -68,7 +72,7 @@ bool ChessBoard::IsWhitePiece(int xCoordinate, int yCoordinate) {
 	return 'A' <= piece && piece <= 'Z';
 }
 
-bool ChessBoard::IsEmpty(int xCoordinate, int yCoordinate)
+bool ChessBoard::IsSquareEmpty(int xCoordinate, int yCoordinate)
 {
 	return !IsBlackPiece(xCoordinate, yCoordinate)
 		&& !IsWhitePiece(xCoordinate, yCoordinate);

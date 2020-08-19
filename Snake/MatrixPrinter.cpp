@@ -2,6 +2,7 @@
 #include "pch.h"
 #include "MatrixPrinter.h"
 
+
 using namespace Screen;
 
 MatrixPrinter::MatrixPrinter(
@@ -14,8 +15,9 @@ MatrixPrinter::MatrixPrinter(
 	
 	buffer = new char*[rowCount];
 	for (int i = 0; i < rowCount; i++) {
-		buffer[i] = new char[columnCount];
-		strcpy_s(buffer[i], columnCount, initialBuffer[i]);
+		buffer[i] = new char[columnCount + 1];
+		buffer[i][columnCount] = 0;
+		strcpy(buffer[i], (const char*) initialBuffer[i]);
 	}
 }
 
@@ -27,12 +29,13 @@ MatrixPrinter::~MatrixPrinter() {
 }
 
 void MatrixPrinter::WriteAllToScreen(
-	Coordinate startPosition
-) {
-	currentPosition.x = startPosition.x;
-	currentPosition.y = startPosition.y;
-	
-	uint16_t finalYPosition = startPosition.y + rowCount;
+	Coordinate printStartPosition
+) {	
+	startPosition.x = printStartPosition.x;
+	startPosition.y = printStartPosition.y;
+
+	uint16_t finalYPosition = printStartPosition.y + rowCount;
+
 	for (currentPosition.y = startPosition.y; currentPosition.y < finalYPosition; currentPosition.y++)
 	{
 		currentPosition.x = startPosition.x;
@@ -56,6 +59,5 @@ void MatrixPrinter::PrintCurrentRow(char* currentRow) {
 	for (int position = 0; position < columnCount; position++)
 	{
 		putchar(currentRow[position]);
-		position++;
 	}
 }
