@@ -18,8 +18,6 @@ ChessBoard::ChessBoard()
 void ChessBoard::PrintState()
 {
 	boardPrinter->WriteAllToScreen(boardStartPosition);
-
-	return;
 }
 
 char ChessBoard::GetPieceAt(int xCoordinate, int yCoordinate)
