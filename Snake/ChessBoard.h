@@ -36,7 +36,8 @@ class ChessBoard
 public:
 	ChessBoard();
 	void PrintState();
-	bool Move(int xCoordinate, int yCoordinate, int newCharacter);
+	bool Move(int xCoordinate, int yCoordinate, char newCharacter);
+	bool ILLEGAL_ForceMove(Coordinate piecePosition, Coordinate newPiecePosition);
 	char GetPieceAt(int xCoordinate, int yCoordinate);
 
 private:

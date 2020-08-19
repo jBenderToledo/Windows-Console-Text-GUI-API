@@ -19,6 +19,23 @@ ChessBoard::ChessBoard()
 void ChessBoard::PrintState()
 {
 	boardPrinter->WriteAllToScreen();
+
+	ConsoleIO::GotoXY(promptStartPosition);
+}
+
+bool ChessBoard::ILLEGAL_ForceMove(Coordinate piecePosition, Coordinate newPiecePosition)
+{
+	int x0 = piecePosition.x, x1 = newPiecePosition.x, y0 = piecePosition.y, y1 = newPiecePosition.y;
+
+	boardState[y1][x1] = boardState[y0][x0];
+	boardPrinter->Edit(3*x1 + 1, 3*y1 + 1, boardState[y1][x1]);
+
+	boardState[y0][x0] = IsWhiteSquare(3*x0+1, 3*y0+1) ? WHITE_SQUARE : BLACK_SQUARE;
+	boardPrinter->Edit(3*x0 + 1, 3*y0 + 1, boardState[y0][x0]);
+
+	ConsoleIO::GotoXY(promptStartPosition);
+
+	return true;
 }
 
 char ChessBoard::GetPieceAt(int xCoordinate, int yCoordinate)

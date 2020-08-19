@@ -8,8 +8,13 @@ int main()
 
 	PlayChess.PrintState();
 
-	std::cout << "\n\nSuccess!\n\n";
+	std::cout << "Success!\n\n";
 
 	char exitInput;
-	std::cin >> exitInput;
+	exitInput = _getch();
+
+	PlayChess.ILLEGAL_ForceMove({ 0,7 }, { 4,3 });
+
+	std::cout << "Psych!! Get dunked on, NERD! Re5!\n\n";
+	exitInput = _getch();
 };

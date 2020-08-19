@@ -45,6 +45,9 @@ void Screen::MatrixPrinter::Edit(int xCoordinate, int yCoordinate, char newValue
 		&& 0 <= yCoordinate && yCoordinate < rowCount) {
 		buffer[yCoordinate][xCoordinate] = newValue;
 
+		currentPosition.x = xCoordinate + startPosition.x;
+		currentPosition.y = yCoordinate + startPosition.y;
+
 		Screen::ConsoleIO::GotoXY(currentPosition);
 		putchar(newValue);
 	}
