@@ -40,6 +40,16 @@ void MatrixPrinter::WriteAllToScreen() {
 	}
 }
 
+void Screen::MatrixPrinter::Edit(int xCoordinate, int yCoordinate, char newValue) {
+	if (0 <= xCoordinate && xCoordinate < columnCount
+		&& 0 <= yCoordinate && yCoordinate < rowCount) {
+		buffer[yCoordinate][xCoordinate] = newValue;
+
+		Screen::ConsoleIO::GotoXY(currentPosition);
+		putchar(newValue);
+	}
+}
+
 char* MatrixPrinter::DetermineCurrentRow() {
 	return buffer[currentPosition.y - startPosition.y];
 }
