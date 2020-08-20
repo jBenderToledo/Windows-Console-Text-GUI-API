@@ -159,6 +159,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="ConsoleIO.h" />
     <ClInclude Include="TicTacToeBoard.h" />
+    <ClInclude Include="TicTacToeLogic.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ChessBoard.cpp" />
@@ -173,6 +174,7 @@
     <ClCompile Include="GUI_Test.cpp" />
     <ClCompile Include="ConsoleIO.cpp" />
     <ClCompile Include="TicTacToeBoard.cpp" />
+    <ClCompile Include="TicTacToeLogic.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -24,6 +24,9 @@
     <Filter Include="Header Files\TicTacToeBoard">
       <UniqueIdentifier>{0146e2e0-8bc4-42f2-a1b7-fb3a991be352}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\TicTacToeBoard">
+      <UniqueIdentifier>{4564b8f1-6f5d-4ce5-918b-04516162130a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -47,6 +50,9 @@
     <ClInclude Include="TicTacToeBoard.h">
       <Filter>Header Files\TicTacToeBoard</Filter>
     </ClInclude>
+    <ClInclude Include="TicTacToeLogic.h">
+      <Filter>Header Files\TicTacToeBoard</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -68,7 +74,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="TicTacToeBoard.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\TicTacToeBoard</Filter>
+    </ClCompile>
+    <ClCompile Include="TicTacToeLogic.cpp">
+      <Filter>Source Files\TicTacToeBoard</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

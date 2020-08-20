@@ -2,7 +2,10 @@
 #include "pch.h"
 
 #include "TicTacToeBoard.h"
+#include "TicTacToeLogic.h"
 #include <array>
+
+using namespace TicTacToe;
 
 bool TicTacToeBoard::isEmpty(int xCoordinate, int yCoordinate) {
 	int playerIndex = getPlayerIndexOf(xCoordinate, yCoordinate);
