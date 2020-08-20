@@ -8,9 +8,15 @@
 using namespace TicTacToe;
 
 bool Board::isEmpty(int xCoordinate, int yCoordinate) {
-	int playerIndex = getPlayerIndexOf(xCoordinate, yCoordinate);
+	return (gameState() != 0);
+}
 
-	return playerIndex == 1 || playerIndex == 2;
+bool Board::isGameOver(int xCoordinate, int yCoordinate) {
+	return (gameState() != GameStatus::ongoing);
+}
+
+int Board::gameState() {
+	return Logic::gameStatus(boardState);
 }
 
 int Board::getPlayerIndexOf(int xCoordinate, int yCoordinate) {
