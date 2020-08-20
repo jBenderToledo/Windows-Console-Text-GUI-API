@@ -6,6 +6,13 @@
 
 namespace TicTacToe {
 
+	enum GameStatus {
+		ongoing = 0,
+		player1Wins,
+		player2Wins,
+		tiedGame
+	};
+
 	class Board {
 		std::array<char, 3> PLAYER_SYMBOLS = { ' ', 'X', 'O' };
 
@@ -14,12 +21,6 @@ namespace TicTacToe {
 		Coordinate initialPosition = { 2,2 };
 
 	public:
-		enum GameStatus {
-			ongoing = 0,
-			player1Wins,
-			player2Wins,
-			tiedGame
-		};
 
 		Board();
 		void printBoardState();

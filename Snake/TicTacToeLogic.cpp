@@ -2,6 +2,7 @@
 #include "pch.h"
 
 #include "TicTacToeLogic.h"
+#include "TicTacToeBoard.h"
 
 using namespace TicTacToe;
 
@@ -9,13 +10,13 @@ int Logic::gameStatus(const int* board) {
 	int possibleState = 0;
 
 	possibleState = horizontalState(board);
-	if (possibleState != 0) return possibleState;
+	if (possibleState != GameStatus::ongoing) return possibleState;
 
 	possibleState = verticalState(board);
-	if (possibleState != 0) return possibleState;
+	if (possibleState != GameStatus::ongoing) return possibleState;
 
 	possibleState = rightDiagonalState(board);
-	if (possibleState != 0) return possibleState;
+	if (possibleState != GameStatus::ongoing) return possibleState;
 
 	possibleState = leftDiagonalState(board);
 	
