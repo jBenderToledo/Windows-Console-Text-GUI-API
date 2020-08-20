@@ -58,7 +58,6 @@ int Logic::verticalState(const int* board) {
 }
 
 int Logic::rightDiagonalState(const int* board) {
-	bool isWinner;
 	int rowPlayer;
 
 	rowPlayer = getPlayerAt(board, 0, 0);
@@ -72,7 +71,6 @@ int Logic::rightDiagonalState(const int* board) {
 }
 
 int Logic::leftDiagonalState(const int* board) {
-	bool isWinner;
 	int rowPlayer;
 
 	rowPlayer = getPlayerAt(board, 0, 2);
@@ -85,8 +83,7 @@ int Logic::leftDiagonalState(const int* board) {
 	return 0;
 }
 
-bool TicTacToe::Logic::isBoardFull(const int* board)
-{
+bool TicTacToe::Logic::isBoardFull(const int* board) {
 	for (int row = 0; row < 3; row++) {
 		for (int column = 0; column < 3; column++) {
 			if (getPlayerAt(board, column, row) == 0) {
@@ -98,7 +95,6 @@ bool TicTacToe::Logic::isBoardFull(const int* board)
 	return true;
 }
 
-int Logic::getPlayerAt(const int* board, int x, int y)
-{
+int Logic::getPlayerAt(const int* board, int x, int y) {
 	return board[3 * y + x];
 }
