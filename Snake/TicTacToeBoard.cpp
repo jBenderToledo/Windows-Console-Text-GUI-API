@@ -7,26 +7,26 @@
 
 using namespace TicTacToe;
 
-bool TicTacToeBoard::isEmpty(int xCoordinate, int yCoordinate) {
+bool Board::isEmpty(int xCoordinate, int yCoordinate) {
 	int playerIndex = getPlayerIndexOf(xCoordinate, yCoordinate);
 
 	return playerIndex == 1 || playerIndex == 2;
 }
 
-int TicTacToeBoard::getPlayerIndexOf(int xCoordinate, int yCoordinate) {
+int Board::getPlayerIndexOf(int xCoordinate, int yCoordinate) {
 	int boardStateIndex = 3 * yCoordinate + xCoordinate;
 	int playerIndex = boardState[boardStateIndex];
 
 	return playerIndex;
 }
 
-char TicTacToeBoard::getPlayerSymbolOf(int xCoordinate, int yCoordinate) {
+char Board::getPlayerSymbolOf(int xCoordinate, int yCoordinate) {
 	int playerIndex = getPlayerIndexOf(xCoordinate, yCoordinate);
 
 	return PLAYER_SYMBOLS[playerIndex];
 }
 
-std::array<std::array<char, 3>, 3> TicTacToeBoard::getSymbolicBoardState() {
+std::array<std::array<char, 3>, 3> Board::getSymbolicBoardState() {
 	std::array<std::array<char, 3>, 3> symbolicBoardState;
 
 	for (int y = 0; y < 3; y++) {

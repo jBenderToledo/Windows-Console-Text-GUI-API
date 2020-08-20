@@ -5,7 +5,7 @@
 #include <array>
 
 namespace TicTacToe {
-	class TicTacToeBoard {
+	class Board {
 		std::array<char, 3> PLAYER_SYMBOLS = { ' ', 'X', 'O' };
 
 		int boardState[9] = { 0 };
@@ -13,7 +13,7 @@ namespace TicTacToe {
 		Coordinate initialPosition = { 2,2 };
 
 	public:
-		TicTacToeBoard();
+		Board();
 
 	private:
 		bool isEmpty(int xCoordinate, int yCoordinate);

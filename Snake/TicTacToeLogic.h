@@ -1,5 +1,10 @@
 #pragma once
-class TicTacToeLogic
-{
-};
+#include "pch.h"
+
+namespace TicTacToe {
+	class Logic
+	{
+		
+	};
+}
 
